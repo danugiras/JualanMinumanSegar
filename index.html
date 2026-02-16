@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minuman Segar Cibinong</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="container">
+            <div class="image/judul buah.jpg"> Minuman Segar</div>
+            <div class="menu">
+                <a href="#home">Home</a>
+                <a href="#tentang">Tentang</a>
+                <a href="#menu">Menu</a>
+                <a href="#pesan" class="btn">Pesan</a>
+            </div>
+        </div>
+    </nav>
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-overlay">
+        <div class="hero-content">
+            <h1>Minuman Paling Segar di Cibinong</h1>
+            <p>Es Lumut • Es Teler • Jus Buah<br>Dingin, Murah, Enak Banget</p>
+            <a href="#pesan" class="btn besar">Pesan Sekarang</a>
+        </div>
+    </div>
+</section>
+
+    <!-- Tentang -->
+    <section id="tentang" class="section">
+        <div class="container">
+            <h2>Tentang Kami</h2>
+            <p>Kami jual minuman homemade segar di Cibinong. Semua dari bahan yang fresh, es bersih, porsi banyak. Dekat Alun-alun Ciri Mekar. Buka Sabtu-Minggu jam 08.00–19.00. Antar area Cibinong Rp10.000.</p>
+        </div>
+    </section>
+
+    <!-- Menu -->
+    <section id="menu" class="section menu-section">
+        <div class="container">
+            <h2>Menu Kami</h2>
+            <div class="grid-menu">
+                <div class="card">
+                    <img src="image/es lumut.jpg" alt="Es Lumut">
+                    <h3>Es Lumut</h3>
+                    <p>Santan + lumut hijau + kelapa muda</p>
+                    <div class="harga">Rp 8.000</div>
+                </div>
+                <div class="card">
+                    <img src="image/es teler .jpg" alt="Es Teler">
+                    <h3>Es Teler</h3>
+                    <p>Alpukat, nangka, kelapa, susu kental</p>
+                    <div class="harga">Rp 10.000</div>
+                </div>
+                <div class="card">
+                    <img src="image/Jus buah .jpg" alt="Jus Buah">
+                    <h3>Jus Buah Segar</h3>
+                    <p>Mangga / alpukat / sirsak / mix</p>
+                    <div class="harga">Rp 15.000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Pesan -->
+    <section id="pesan" class="section pesan-section">
+        <div class="container">
+            <h2>Pesan Sekarang</h2>
+            <div class="pesan-grid">
+                <!-- Form -->
+                <form class="form-pesan">
+                    <div class="input-group">
+                        <label>Minuman</label>
+                        <select id="minuman">
+                            <option value="">Pilih minuman</option>
+                            <option value="eslumut" data-harga="8000">Es Lumut - Rp8.000</option>
+                            <option value="esteler" data-harga="10000">Es Teler - Rp10.000</option>
+                            <option value="jusbuah" data-harga="15000">Jus Buah - Rp15.000</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Jumlah</label>
+                        <input type="number" id="jumlah" value="1" min="1">
+                    </div>
+
+                    <div class="harga-tampil">
+                        <p>Satuan: <span id="satuan">Rp 0</span></p>
+                        <p><strong>Total: <span id="total">Rp 0</span></strong></p>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Nama</label>
+                        <input type="text" id="nama" placeholder="JENENG MU">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Alamat</label>
+                        <input type="text" id="alamat" placeholder="Alamat lengkap">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Catatan</label>
+                        <textarea id="catatan" placeholder="Catatan tambahan..."></textarea>
+                    </div>
+
+                    <a href="#" id="kirim" class="btn besar">Kirim ke WhatsApp</a>
+                </form>
+
+                <!-- Info pembayaran -->
+                <div class="info-bayar">
+                    <h3>Transfer ke</h3>
+                    <div class="rek">
+                        <strong>1840004786040</strong>
+                        <span>Bank Mandiri</span>
+                        <span>GIRAS DANU PRATAMA</span>
+                    </div>
+                    <p>OJO LALI Kirim bukti transfer ke WA setelah bayar ya!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Minuman Segar Cibinong © 2026</p>
+    </footer>
+
+    <!-- JavaScript sederhana -->
+    <script>
+        const minuman = document.getElementById('minuman');
+        const jumlah = document.getElementById('jumlah');
+        const satuan = document.getElementById('satuan');
+        const totalEl = document.getElementById('total');
+
+        function updateHarga() {
+            const opt = minuman.options[minuman.selectedIndex];
+            let hrg = 0;
+            if (opt && opt.dataset.harga) hrg = parseInt(opt.dataset.harga);
+            const jml = parseInt(jumlah.value) || 1;
+            const tot = hrg * jml;
+
+            satuan.textContent = 'Rp ' + hrg.toLocaleString('id-ID');
+            totalEl.textContent = 'Rp ' + tot.toLocaleString('id-ID');
+        }
+
+        minuman.addEventListener('change', updateHarga);
+        jumlah.addEventListener('input', updateHarga);
+        updateHarga();
+
+        // Kirim WA
+        document.getElementById('kirim').addEventListener('click', e => {
+            e.preventDefault();
+
+            const mnm = minuman.value || '';
+            const jml = jumlah.value || '1';
+            const nm = document.getElementById('nama').value || '';
+            const alm = document.getElementById('alamat').value || '';
+            const cat = document.getElementById('catatan').value || '-';
+
+            const opt = minuman.options[minuman.selectedIndex];
+            const hrg = opt && opt.dataset.harga ? parseInt(opt.dataset.harga) : 0;
+            const tot = hrg * parseInt(jml);
+
+            const txt = `Halo! Mau pesan:%0A` +
+                `• ${mnm || 'belum dipilih'} x ${jml}%0A` +
+                `• Total: Rp${tot.toLocaleString('id-ID')}%0A%0A` +
+                `Nama: ${nm}%0A` +
+                `Alamat: ${alm}%0A` +
+                `Catatan: ${cat}%0A%0A` +
+                `Transfer ke Mandiri 1840004786040 ya. Terima kasih!`;
+
+            window.open('https://wa.me/6285728464576?text=' + txt, '_blank');
+        });
+    </script>
+</body>
+</html>
